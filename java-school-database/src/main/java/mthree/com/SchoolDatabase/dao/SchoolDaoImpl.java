@@ -36,7 +36,9 @@ public class SchoolDaoImpl implements SchoolDao {
         // sorted by last name.
         // YOUR CODE STARTS HERE
 
-        String sql = "SELECT fName, lName FROM student ORDER BY lName;";
+        String sql = "SELECT fName, lName\n" +
+                "FROM student\n" +
+                "ORDER BY lName;";
 
         // YOUR CODE ENDS HERE
 
@@ -49,7 +51,11 @@ public class SchoolDaoImpl implements SchoolDao {
         // for all courses in the Computer Science department.
         // YOUR CODE STARTS HERE
 
-         String sql = "SELECT c.courseCode, c.courseDesc FROM course c LEFT JOIN teacher t ON c.teacherId = t.tId WHERE t.dept = 'Computer Science';";
+         String sql = "SELECT courseCode, courseDesc\n" +
+                 "FROM course \n" +
+                 "LEFT JOIN teacher\n" +
+                 "ON teacherId = tId\n" +
+                 "WHERE dept = 'Computer Science';";
 
         // YOUR CODE ENDS HERE
         return jdbcTemplate.query(sql, new CourseMapper());
@@ -61,8 +67,9 @@ public class SchoolDaoImpl implements SchoolDao {
         //  Name the aggregate field `teacherCount`.
         // YOUR CODE STARTS HERE
 
-        String sql = "SELECT dept, COUNT(tId) AS teacherCount FROM teacher GROUP BY dept;";
-
+        String sql = "SELECT dept, COUNT(tId) AS teacherCount\n" +
+                "FROM teacher\n" +
+                "GROUP BY dept;";
         // YOUR CODE ENDS HERE
         return jdbcTemplate.query(sql, new TeacherCountMapper());
     }
@@ -74,7 +81,10 @@ public class SchoolDaoImpl implements SchoolDao {
         // Name the aggregate field `numStudents`.
         // YOUR CODE STARTS HERE
 
-        String sql = "SELECT c.courseCode, c.courseDesc, COUNT(cs.student_id) AS numStudents FROM course c INNER JOIN course_student cs ON cs.course_id = c.cid GROUP BY c.courseCode, c.courseDesc;";
+        String sql = "SELECT courseCode, courseDesc, COUNT(student_id) AS numStudents\n" +
+                "FROM course \n" +
+                "INNER JOIN course_student ON course_id = cid\n" +
+                "GROUP BY courseCode, courseDesc;";
 
         // YOUR CODE ENDS HERE
         return jdbcTemplate.query(sql, new StudentCountMapper());
@@ -88,7 +98,8 @@ public class SchoolDaoImpl implements SchoolDao {
         // Need to add in the sid for Robert Dylan.  Use sid: 123
         // YOUR CODE STARTS HERE
 
-        String sql = "INSERT INTO student VALUES (123, 'Robert', 'Dylan');";
+        String sql = "INSERT INTO student\n" +
+                "VALUES (123, 'Robert', 'Dylan');";
 
         // YOUR CODE ENDS HERE
          System.out.println(jdbcTemplate.update(sql));
@@ -101,7 +112,11 @@ public class SchoolDaoImpl implements SchoolDao {
         // You will need to include a sid in your query.  Use 123
         // YOUR CODE STARTS HERE
 
-        String sql = "INSERT INTO course_student SELECT sid, cid FROM student LEFT JOIN course ON courseCode = 'CS148' WHERE sid = 123;";
+        String sql = "INSERT INTO course_student\n" +
+                "SELECT sid, cid\n" +
+                "FROM student\n" +
+                "LEFT JOIN course ON courseCode = 'CS148'\n" +
+                "WHERE sid = 123;";
 
         // YOUR CODE ENDS HERE
         jdbcTemplate.update(sql);
@@ -112,7 +127,9 @@ public class SchoolDaoImpl implements SchoolDao {
         // Write a query to change the course description for course CS305 to "Advanced Python with Flask".
         // YOUR CODE STARTS HERE
 
-        String sql = "UPDATE course SET courseDesc = 'Advanced Python with Flask' WHERE courseCode = 'CS305';";
+        String sql = "UPDATE course\n" +
+                "SET courseDesc = 'Advanced Python with Flask'\n" +
+                "WHERE courseCode = 'CS305';";
 
         // YOUR CODE ENDS HERE
         jdbcTemplate.update(sql);
@@ -123,7 +140,9 @@ public class SchoolDaoImpl implements SchoolDao {
         // Write a query to remove David Mitchell as a teacher.
         // YOUR CODE STARTS HERE
 
-        String sql = "DELETE FROM teacher WHERE tFName = 'David' AND tLName = 'Mitchell';";
+        String sql = "DELETE FROM teacher\n" +
+                "WHERE tFName = 'David'\n" +
+                "AND tLName = 'Mitchell';";
 
         // YOUR CODE ENDS HERE
         jdbcTemplate.update(sql);
