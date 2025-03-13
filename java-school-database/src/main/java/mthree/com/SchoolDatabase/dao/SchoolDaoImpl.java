@@ -88,7 +88,7 @@ public class SchoolDaoImpl implements SchoolDao {
         // Need to add in the sid for Robert Dylan.  Use sid: 123
         // YOUR CODE STARTS HERE
 
-        String sql = "";
+        String sql = "INSERT INTO student VALUES (123, 'Robert', 'Dylan');";
 
         // YOUR CODE ENDS HERE
          System.out.println(jdbcTemplate.update(sql));
@@ -101,7 +101,7 @@ public class SchoolDaoImpl implements SchoolDao {
         // You will need to include a sid in your query.  Use 123
         // YOUR CODE STARTS HERE
 
-        String sql = "";
+        String sql = "INSERT INTO course_student SELECT sid, cid FROM student LEFT JOIN course ON courseCode = 'CS148' WHERE sid = 123;";
 
         // YOUR CODE ENDS HERE
         jdbcTemplate.update(sql);
