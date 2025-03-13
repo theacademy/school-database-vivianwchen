@@ -35,6 +35,7 @@ public class SchoolDaoImpl implements SchoolDao {
         // Write a query that returns all students (first name, last name only)
         // sorted by last name.
         // YOUR CODE STARTS HERE
+
         String sql = "SELECT fName, lName FROM student ORDER BY lName;";
 
         // YOUR CODE ENDS HERE
@@ -60,7 +61,7 @@ public class SchoolDaoImpl implements SchoolDao {
         //  Name the aggregate field `teacherCount`.
         // YOUR CODE STARTS HERE
 
-        String sql = "";
+        String sql = "SELECT dept, COUNT(tId) AS teacherCount FROM teacher GROUP BY dept;";
 
         // YOUR CODE ENDS HERE
         return jdbcTemplate.query(sql, new TeacherCountMapper());
